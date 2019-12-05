@@ -6,6 +6,7 @@ Created on Tue Dec  3 23:25:26 2019
 https://www.youtube.com/watch?v=Xi52tx6phRU
 """
 import csv
+import pandas as pd
 #from datetime import datetime
 #print(dir(csv))
 
@@ -24,22 +25,16 @@ header = next(reader)
 data = [row for row in reader]
 
 print(header)
-print(data[0])
+print(data[0])  
 
-'''
-data = []
+df = pd.read_csv(path)
 
-for row in reader:
-    # row = [Date, Open, High, low, Close, Volume, Adj. Close]
-    date= datetime.strpttime(row[0], '%m%d%Y')
+print(df)
 
-open_price = float(row[1])
-high = float(row[2])
-low = float(row[3])
-close = float(row[4])
-volume = float(row[5])
-adj_close = float(row[6])
+df["Swing"] = df["High"] - df["Low"]
 
-data1.append([date, open_price, high, low, close, volume, adj_close])
+print(df)
 
-'''   
+df = df.sort_values(by=['Swing'], ascending=False)
+
+print(df)
